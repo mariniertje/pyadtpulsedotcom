@@ -24,7 +24,7 @@ class AdtPulsedotcom(object):
 
     # AdtPulse.com baseURL
     ADTPULSEDOTCOM_URL = 'https://portal.adtpulse.com'
-	
+    
     # AdtPulse.com contextPath
     def adtpulse_version(ADTPULSEDOTCOM_URL):
         """Determine current ADT Pulse version"""
