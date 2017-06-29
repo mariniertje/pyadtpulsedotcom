@@ -6,9 +6,7 @@ import asyncio
 import async_timeout
 from bs4 import BeautifulSoup
 
-
 _LOGGER = logging.getLogger(__name__)
-
 
 class AdtPulsedotcom(object):
     """
@@ -18,34 +16,33 @@ class AdtPulsedotcom(object):
     portal.adtpulse.com. The basic functions of checking system status and arming
     and disarming the system are possible.
     """
-
+    
     # AdtPulse.com constants
-
+    
     # AdtPulse.com baseURL
     ADTPULSEDOTCOM_URL = 'https://portal.adtpulse.com'
     
     # AdtPulse.com contextPath
-    HTML_PARSER = 'html.parser'
     def adtpulse_version (ADTPULSEDOTCOM_URL):
         """Determine current ADT Pulse version"""
         resp = requests.get(ADTPULSEDOTCOM_URL)
-        parsed = BeautifulSoup(resp.content, HTML_PARSER)
+        parsed = BeautifulSoup(resp.content, html.parser)
         adtpulse_script = parsed.find_all('script', type='text/javascript')[4].string
         if "=" in adtpulse_script:
             param, value = adtpulse_script.split("=",1)
         adtpulse_version = value
         adtpulse_version = adtpulse_version[1:-2]
         return(adtpulse_version)
-
+    
     ADTPULSEDOTCOM_CONTEXT_PATH = adtpulse_version(ADTPULSEDOTCOM_URL)
-
+    
     # Page elements on portal.adtpulse.com that are needed
     # Using a dict for the attributes to set whether it is a name or id for locating the field
     LOGIN_URL = ADTPULSEDOTCOM_URL + ADTPULSEDOTCOM_CONTEXT_PATH + '/access/signin.jsp'
     LOGIN_USERNAME = ('name', 'usernameForm')
     LOGIN_PASSWORD = ('name', 'passwordForm')
     LOGIN_BUTTON = ('name', 'signin')
-    	
+    
     DASHBOARD_URL = ADTPULSEDOTCOM_URL + ADTPULSEDOTCOM_CONTEXT_PATH + '/summary/summary.jsp'
     
     STATUS_IMG = ('id', 'divOrb')
