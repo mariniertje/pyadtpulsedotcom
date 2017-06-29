@@ -26,7 +26,7 @@ class AdtPulsedotcom(object):
     def adtpulse_version (ADTPULSEDOTCOM_URL):
         """Determine current ADT Pulse version"""
         resp = requests.get(ADTPULSEDOTCOM_URL)
-        parsed = BeautifulSoup(resp.content, html.parser)
+        parsed = BeautifulSoup(resp.content, 'html.parser')
         adtpulse_script = parsed.find_all('script', type='text/javascript')[4].string
         if "=" in adtpulse_script:
             param, value = adtpulse_script.split("=",1)
