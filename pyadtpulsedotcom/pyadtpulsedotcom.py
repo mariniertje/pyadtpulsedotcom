@@ -1,3 +1,4 @@
+import requests
 import re
 import logging
 import aiohttp
