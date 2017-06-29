@@ -25,6 +25,7 @@ class AdtPulsedotcom(object):
     ADTPULSEDOTCOM_URL = 'https://portal.adtpulse.com'
     
     # AdtPulse.com contextPath
+    HTML_PARSER = 'html.parser'
     def adtpulse_version (ADTPULSEDOTCOM_URL):
         """Determine current ADT Pulse version"""
         resp = requests.get(ADTPULSEDOTCOM_URL)
