@@ -66,8 +66,6 @@ class AdtPulsedotcom(object):
     ERROR_CONTROL = 'warnMsgContents'
     MESSAGE_CONTROL = 'divOrbWarningsContainer'
     
-    VIEWSTATE = 'divOrbTextSummary'
-    
     # Event validation
     EVENTVALIDATION = '__EVENTVALIDATION'
     DISARM_EVENT_VALIDATION = \
@@ -129,9 +127,7 @@ class AdtPulsedotcom(object):
            tree = BeautifulSoup(text, 'html.parser')
            self._login_info = {
                'sessionkey': self.SESSION_KEY_RE.match(
-                   str(response.url)).groupdict()['JSESSIONID'],
-               self.VIEWSTATE: tree.select(
-                   '#{}'.format(self.VIEWSTATE))[0].attrs.get('value')
+                   str(response.url)).groupdict()['JSESSIONID']
            }
 
            _LOGGER.debug(self._login_info)
@@ -148,7 +144,6 @@ class AdtPulsedotcom(object):
        params = {
            self.USERNAME: self._username,
            self.PASSWORD: self._password,
-           self.VIEWSTATE: self._login_info[self.VIEWSTATE]
        }
 
        try:
@@ -231,8 +226,6 @@ class AdtPulsedotcom(object):
                     self.DASHBOARD_URL.format(
                         self._login_info['sessionkey']),
                     data={
-                        self.VIEWSTATE: '',
-                        self.VIEWSTATEENCRYPTED: '',
                         self.EVENTVALIDATION:
                             self.COMMAND_LIST[event]['eventvalidation'],
                         self.COMMAND_LIST[event]['command']: event})
