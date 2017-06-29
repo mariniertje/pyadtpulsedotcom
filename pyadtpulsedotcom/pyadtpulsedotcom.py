@@ -168,7 +168,7 @@ class AdtPulsedotcom(object):
            except IndexError:
                try:
                    error_control = tree.select(
-                       '#{}'.format(self.ERROR_CONTROL))[0].attrs.get('value')
+                       '#{}'.format(self.ERROR_CONTROL)).attrs.get('value')
                    if 'Login failure: Bad Credentials' in error_control:
                        _LOGGER.error(error_control)
                        return False
