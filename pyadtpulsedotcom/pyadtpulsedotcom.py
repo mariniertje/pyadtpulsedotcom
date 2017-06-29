@@ -63,8 +63,8 @@ class AdtPulsedotcom(object):
     
     LOGIN_CONST = 'signin'
     
-    ERROR_CONTROL = 'warnMsgContents'
-    MESSAGE_CONTROL = 'divOrbWarningsContainer'
+    ERROR_CONTROL = 'divOrbWarningsContainer'
+    MESSAGE_CONTROL = 'warnMsgContents'
     
     # Event validation
     EVENTVALIDATION = '__EVENTVALIDATION'
