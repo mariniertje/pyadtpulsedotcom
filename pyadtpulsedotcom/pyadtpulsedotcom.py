@@ -19,7 +19,6 @@ class AdtPulsedotcom(object):
     and disarming the system are possible.
     """
 
-
     # AdtPulse.com constants
 
     # AdtPulse.com baseURL
@@ -45,22 +44,21 @@ class AdtPulsedotcom(object):
     LOGIN_USERNAME = ('name', 'usernameForm')
     LOGIN_PASSWORD = ('name', 'passwordForm')
     LOGIN_BUTTON = ('name', 'signin')
-	
-	DASHBOARD_URL = ADTPULSEDOTCOM_URL + ADTPULSEDOTCOM_CONTEXT_PATH + '/summary/summary.jsp'
-
+    	
+    DASHBOARD_URL = ADTPULSEDOTCOM_URL + ADTPULSEDOTCOM_CONTEXT_PATH + '/summary/summary.jsp'
+    
     STATUS_IMG = ('id', 'divOrb')
     
     BTN_DISARM = ('id', 'security_button_1')
     BTN_ARM_STAY = ('id', 'security_button_3', 'Arm Stay')
     BTN_ARM_AWAY = ('id', 'security_button_2', 'Arm Away')
-
+    
     # Image to check if hidden or not while the system performs it's action.
     STATUS_UPDATING = {'id': 'divOrb'}    
     # Session key regex to extract the current session
     SESSION_KEY_RE = re.compile(
         '{url}(?P<JSESSIONID>.*)'.format(url=LOGIN_URL))
-
-		
+    
     # ADTPULSE.COM CSS MAPPINGS
     USERNAME = 'username'
     PASSWORD = 'password'
