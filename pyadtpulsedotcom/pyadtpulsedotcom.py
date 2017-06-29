@@ -24,19 +24,19 @@ class AdtPulsedotcom(object):
     # AdtPulse.com baseURL
     ADTPULSEDOTCOM_URL = 'https://portal.adtpulse.com'
 	
-	# AdtPulse.com contextPath
-	def adtpulse_version(ADTPULSEDOTCOM_URL):
-		"""Determine current ADT Pulse version"""
-		resp = requests.get(ADTPULSEDOTCOM_URL)
-		parsed = BeautifulSoup(resp.content, HTML_PARSER)
-		adtpulse_script = parsed.find_all('script', type='text/javascript')[4].string
-		if "=" in adtpulse_script:
-			param, value = adtpulse_script.split("=",1)
-		adtpulse_version = value
-		adtpulse_version = adtpulse_version[1:-2]
-		return(adtpulse_version)
+    # AdtPulse.com contextPath
+    def adtpulse_version(ADTPULSEDOTCOM_URL):
+        """Determine current ADT Pulse version"""
+        resp = requests.get(ADTPULSEDOTCOM_URL)
+        parsed = BeautifulSoup(resp.content, HTML_PARSER)
+        adtpulse_script = parsed.find_all('script', type='text/javascript')[4].string
+        if "=" in adtpulse_script:
+            param, value = adtpulse_script.split("=",1)
+        adtpulse_version = value
+        adtpulse_version = adtpulse_version[1:-2]
+        return(adtpulse_version)
 
-	ADTPULSEDOTCOM_CONTEXT_PATH = adtpulse_version(ADTPULSEDOTCOM_URL)
+    ADTPULSEDOTCOM_CONTEXT_PATH = adtpulse_version(ADTPULSEDOTCOM_URL)
 
     # Page elements on portal.adtpulse.com that are needed
     # Using a dict for the attributes to set whether it is a name or id for locating the field
