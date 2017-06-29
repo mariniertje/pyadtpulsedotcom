@@ -82,7 +82,7 @@ class AdtPulsedotcom(object):
     ARM_AWAY_COMMAND = 'Arm Away'
     
     ARMING_PANEL = '#ctl00_phBody_pnlArming'
-    ALARM_STATE = '#ctl00_phBody_lblArmingState'
+    ALARM_STATE = 'divOrbTextSummary'
 
     COMMAND_LIST = {'Disarm': {'command': DISARM_COMMAND,
                            'eventvalidation': DISARM_EVENT_VALIDATION},
