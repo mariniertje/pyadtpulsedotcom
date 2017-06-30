@@ -153,6 +153,9 @@ class AdtPulsedotcom(object):
            _LOGGER.debug(
                'Status from AdtPulse.com login %s', response.status)
 
+           summary = yield from response.text()
+           _LOGGER.debug(summary)
+        
            # Get the text from the login to ensure that we are logged in.
            text = yield from response.text()
            _LOGGER.debug(text)
