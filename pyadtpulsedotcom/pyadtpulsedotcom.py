@@ -153,29 +153,9 @@ class AdtPulsedotcom(object):
            _LOGGER.debug(
                'Status from AdtPulse.com login %s', response.status)
         
- """          # Get the text from the login to ensure that we are logged in.
-           text = yield from response.text()
-           _LOGGER.debug(text)
-           tree = BeautifulSoup(text, 'html.parser')
-           try:
-               # Get the initial state.
-               self.state = tree.select(self.ALARM_STATE)[0].get_text()
-               _LOGGER.debug(
-                   'Current alarm state: %s', self.state)
-           except IndexError:
-               try:
-                   error_control = tree.select(
-                       '#{}'.format(self.ERROR_CONTROL)).attrs.get('value')
-                   if 'Login failure: Bad Credentials' in error_control:
-                       _LOGGER.error(error_control)
-                       return False
-               except AttributeError:
-                   _LOGGER.error('Error while trying to log into AdtPulse.com')
-                   return False
        except (asyncio.TimeoutError, aiohttp.ClientError):
            _LOGGER.error("Can not load login page from AdtPulse.com")
            return False
-"""
 
     @asyncio.coroutine
     def async_update(self):
