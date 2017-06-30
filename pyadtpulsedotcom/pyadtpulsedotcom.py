@@ -129,8 +129,9 @@ class AdtPulsedotcom(object):
                'sessionkey': response.cookies['JSESSIONID']
            }
 
-           _LOGGER.debug(self._login_info)
-           _LOGGER.info('Successful login to AdtPulse.com')
+            _LOGGER.debug(response.cookies['JSESSIONID'])
+            _LOGGER.debug(self._login_info)
+            _LOGGER.info('Successful login to AdtPulse.com')
 
        except (asyncio.TimeoutError, aiohttp.ClientError):
            _LOGGER.error('Can not get login page from AdtPulse.com')
