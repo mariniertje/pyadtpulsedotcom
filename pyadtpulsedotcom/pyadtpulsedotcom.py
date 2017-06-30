@@ -126,7 +126,7 @@ class AdtPulsedotcom(object):
            _LOGGER.debug(text)
            tree = BeautifulSoup(text, 'html.parser')
            self._login_info = {
-               'sessionkey': response.cookies['JSESSIONID']
+               'sessionkey': response.cookies['JSESSIONID'].value
            }
 
            _LOGGER.debug(response.cookies['JSESSIONID'])
