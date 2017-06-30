@@ -152,11 +152,8 @@ class AdtPulsedotcom(object):
                    self.LOGIN_URL.format, data=params)
            _LOGGER.debug(
                'Status from AdtPulse.com login %s', response.status)
-
-           summary = yield from response.text()
-           _LOGGER.debug(summary)
         
-           # Get the text from the login to ensure that we are logged in.
+ """          # Get the text from the login to ensure that we are logged in.
            text = yield from response.text()
            _LOGGER.debug(text)
            tree = BeautifulSoup(text, 'html.parser')
@@ -178,6 +175,7 @@ class AdtPulsedotcom(object):
        except (asyncio.TimeoutError, aiohttp.ClientError):
            _LOGGER.error("Can not load login page from AdtPulse.com")
            return False
+"""
 
     @asyncio.coroutine
     def async_update(self):
