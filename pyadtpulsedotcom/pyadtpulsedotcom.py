@@ -129,7 +129,6 @@ class AdtPulsedotcom(object):
                'sessionkey': response.cookies['JSESSIONID'].value
            }
 
-           _LOGGER.debug(response.cookies['JSESSIONID'])
            _LOGGER.debug(self._login_info)
            _LOGGER.info('Successful login to AdtPulse.com')
 
