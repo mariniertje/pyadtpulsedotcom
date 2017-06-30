@@ -47,7 +47,7 @@ class AdtPulsedotcom(object):
     
     STATUS_IMG = ('id', 'divOrb')
     
-    BTN_DISARM = ('id', 'security_button_1')
+    BTN_DISARM = ('id', 'security_button_1', 'Disarmed')
     BTN_ARM_STAY = ('id', 'security_button_3', 'Arm Stay')
     BTN_ARM_AWAY = ('id', 'security_button_2', 'Arm Away')
     
@@ -126,8 +126,7 @@ class AdtPulsedotcom(object):
            _LOGGER.debug(text)
            tree = BeautifulSoup(text, 'html.parser')
            self._login_info = {
-               'sessionkey': self.SESSION_KEY_RE.match(
-                   str(response.url)).groupdict()['JSESSIONID']
+               'sessionkey': response.cookies['JSESSIONID']
            }
 
            _LOGGER.debug(self._login_info)
