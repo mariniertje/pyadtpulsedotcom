@@ -58,8 +58,8 @@ class AdtPulsedotcom(object):
         '{url}(?P<JSESSIONID>.*)'.format(url=LOGIN_URL))
     
     # ADTPULSE.COM CSS MAPPINGS
-    USERNAME = 'username'
-    PASSWORD = 'password'
+    USERNAME = 'usernameForm'
+    PASSWORD = 'passwordForm'
     
     LOGIN_CONST = 'signin'
     
@@ -141,8 +141,8 @@ class AdtPulsedotcom(object):
 
         # Login params to pass during the post
         params = {
-            usernameForm: self._username,
-            passwordForm: self._password
+            self.USERNAME: self._username,
+            self.PASSWORD: self._password
         }
 
         try:
