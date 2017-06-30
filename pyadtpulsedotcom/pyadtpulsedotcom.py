@@ -58,8 +58,8 @@ class AdtPulsedotcom(object):
         '{url}(?P<JSESSIONID>.*)'.format(url=LOGIN_URL))
     
     # ADTPULSE.COM CSS MAPPINGS
-    USERNAME = 'username'
-    PASSWORD = 'password'
+    USERNAME = 'usernameForm'
+    PASSWORD = 'passwordForm'
     
     LOGIN_CONST = 'signin'
     
