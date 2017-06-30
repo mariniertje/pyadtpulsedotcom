@@ -58,8 +58,8 @@ class AdtPulsedotcom(object):
         '{url}(?P<JSESSIONID>.*)'.format(url=LOGIN_URL))
     
     # ADTPULSE.COM CSS MAPPINGS
-    USERNAME = 'usernameForm'
-    PASSWORD = 'passwordForm'
+    USERNAME = 'username'
+    PASSWORD = 'password'
     
     LOGIN_CONST = 'signin'
     
@@ -109,53 +109,54 @@ class AdtPulsedotcom(object):
 
     @asyncio.coroutine
     def async_login(self):
-       """Login to AdtPulse.com."""
-       _LOGGER.debug('Attempting to log into AdtPulse.com...')
+        """Login to AdtPulse.com."""
+        _LOGGER.debug('Attempting to log into AdtPulse.com...')
 
-       # Get the session key for future logins.
-       response = None
-       try:
-           with async_timeout.timeout(10, loop=self._loop):
-               response = yield from self._websession.get(
-                   self.LOGIN_URL)
+        # Get the session key for future logins.
+        response = None
+        try:
+            with async_timeout.timeout(10, loop=self._loop):
+                response = yield from self._websession.get(
+                    self.LOGIN_URL)
 
-           _LOGGER.debug(
-               'Response status from AdtPulse.com: %s',
-               response.status)
-           text = yield from response.text()
-           _LOGGER.debug(text)
-           tree = BeautifulSoup(text, 'html.parser')
-           self._login_info = {
-               'sessionkey': response.cookies['JSESSIONID'].value
-           }
+            _LOGGER.debug(
+                'Response status from AdtPulse.com: %s',
+                response.status)
+            text = yield from response.text()
+            _LOGGER.debug(text)
+            tree = BeautifulSoup(text, 'html.parser')
+            self._login_info = {
+                'sessionkey': response.cookies['JSESSIONID'].value
+            }
 
-           _LOGGER.debug(self._login_info)
-           _LOGGER.info('Successful login to AdtPulse.com')
+            _LOGGER.debug(self._login_info)
+            _LOGGER.info('Successfully retrieved sessionkey from AdtPulse.com')
 
-       except (asyncio.TimeoutError, aiohttp.ClientError):
-           _LOGGER.error('Can not get login page from AdtPulse.com')
-           return False
-       except AttributeError:
-           _LOGGER.error('Unable to get sessionKey from AdtPulse.com')
-           raise
+        except (asyncio.TimeoutError, aiohttp.ClientError):
+            _LOGGER.error('Can not get login page from AdtPulse.com')
+            return False
+        except AttributeError:
+            _LOGGER.error('Unable to get sessionKey from AdtPulse.com')
+            raise
 
         # Login params to pass during the post
-       params = {
-           self.USERNAME: self._username,
-           self.PASSWORD: self._password,
-       }
+        params = {
+            usernameForm: self._username,
+            passwordForm: self._password
+        }
 
-       try:
-           # Make an attempt to log in.
-           with async_timeout.timeout(10, loop=self._loop):
-               response = yield from self._websession.post(
-                   self.LOGIN_URL.format, data=params)
-           _LOGGER.debug(
-               'Status from AdtPulse.com login %s', response.status)
+        try:
+            # Make an attempt to log in.
+            with async_timeout.timeout(10, loop=self._loop):
+                response = yield from self._websession.post(
+                    self.LOGIN_URL.format, data=params)
+            _LOGGER.debug(
+                'Status from AdtPulse.com login %s', response.status)
+            _LOGGER.info('Successful login to AdtPulse.com')        
         
-       except (asyncio.TimeoutError, aiohttp.ClientError):
-           _LOGGER.error("Can not load login page from AdtPulse.com")
-           return False
+        except (asyncio.TimeoutError, aiohttp.ClientError):
+            _LOGGER.error("Can not load login page from AdtPulse.com")
+            return False
 
     @asyncio.coroutine
     def async_update(self):
