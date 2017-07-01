@@ -151,9 +151,12 @@ class AdtPulsedotcom(object):
             with async_timeout.timeout(10, loop=self._loop):
                 response = yield from self._websession.post(
                     self.LOGIN_URL.format, data=params)
+
+
             _LOGGER.debug(self._websession.post(self.LOGIN_URL.format, data=params)
-            test = yield from response.text
-            _LOGGER.debug(test)
+            text = yield from response.text()
+            _LOGGER.debug(text)
+            tree = BeautifulSoup(text, 'html.parser')
             _LOGGER.debug(
                 'Status from AdtPulse.com login %s', 
                 response.status)
