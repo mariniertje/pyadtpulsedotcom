@@ -168,8 +168,7 @@ class AdtPulsedotcom(object):
         try:
             with async_timeout.timeout(10, loop=self._loop):
                 response = yield from self._websession.get(
-                    self.DASHBOARD_URL.format(
-                        self._login_info['sessionkey']))
+                    self.DASHBOARD_URL.format)
 
             _LOGGER.debug('Response from AdtPulse.com: %s', response.status)
             text = yield from response.text()
