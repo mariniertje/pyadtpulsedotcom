@@ -152,7 +152,7 @@ class AdtPulsedotcom(object):
                 response = yield from self._websession.post(
                     self.LOGIN_URL.format, data=params)
 
-            _LOGGER.debug(self.USERNAME: self._username, self.PASSWORD: self._password)
+            _LOGGER.debug('%s: %s, %s: %s',self.USERNAME, self._username, self.PASSWORD, self._password)
             test = yield from response.text
             _LOGGER.debug(test)
             _LOGGER.debug(
