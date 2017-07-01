@@ -149,7 +149,7 @@ class AdtPulsedotcom(object):
         try:
             # Make an attempt to log in.
             with async_timeout.timeout(10, loop=self._loop):
-                response = yield from self._websession.post(self.LOGIN_URL.format, data=params)
+                response = yield from self._websession.get(self.LOGIN_URL.format, data=params)
 
             _LOGGER.debug('%s: %s, %s: %s',self.USERNAME, self._username, self.PASSWORD, self._password)
             test = yield from response.text
