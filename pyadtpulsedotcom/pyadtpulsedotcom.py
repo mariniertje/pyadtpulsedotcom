@@ -158,8 +158,8 @@ class AdtPulsedotcom(object):
             _LOGGER.info('Successful login to AdtPulse.com')
 
         except (asyncio.TimeoutError, aiohttp.ClientError):
-        _LOGGER.error("Can not load login page from AdtPulse.com")
-        return False
+            _LOGGER.error("Can not load login page from AdtPulse.com")
+            return False
 
     @asyncio.coroutine
     def async_update(self):
