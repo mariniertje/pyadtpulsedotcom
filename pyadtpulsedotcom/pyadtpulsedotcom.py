@@ -156,10 +156,8 @@ class AdtPulsedotcom(object):
                 'Status from AdtPulse.com login %s', 
                 response.status)
             _LOGGER.info('Successful login to AdtPulse.com')
-            
-            _LOGGER.debug(self._websession.post(self.LOGIN_URL.format, data=params)
-        
-        except (asyncio.TimeoutError, aiohttp.ClientError):
+
+            except (asyncio.TimeoutError, aiohttp.ClientError):
             _LOGGER.error("Can not load login page from AdtPulse.com")
             return False
 
