@@ -151,12 +151,12 @@ class AdtPulsedotcom(object):
             with async_timeout.timeout(10, loop=self._loop):
                 response = yield from self._websession.post(
                     self.LOGIN_URL.format, data=params)
-                _LOGGER.debug(self._websession.post(self.LOGIN_URL.format, data=params)
-            
-            text = yield from response.text
-            _LOGGER.debug(text)
+            _LOGGER.debug(self._websession.post(self.LOGIN_URL.format, data=params)
+            test = yield from response.text
+            _LOGGER.debug(test)
             _LOGGER.debug(
-                'Status from AdtPulse.com login %s', response.status)
+                'Status from AdtPulse.com login %s', 
+                response.status)
             _LOGGER.info('Successful login to AdtPulse.com')        
         
         except (asyncio.TimeoutError, aiohttp.ClientError):
