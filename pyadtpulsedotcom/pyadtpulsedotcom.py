@@ -32,6 +32,7 @@ class AdtPulsedotcom(object):
             param, value = adtpulse_script.split("=",1)
         adtpulse_version = value
         adtpulse_version = adtpulse_version[1:-2]
+        _LOGGER.debug('ADT Pulse ContextPath = %s', adtpulse_version)
         return(adtpulse_version)
     
     ADTPULSEDOTCOM_CONTEXT_PATH = adtpulse_version(ADTPULSEDOTCOM_URL)
@@ -144,12 +145,15 @@ class AdtPulsedotcom(object):
             self.USERNAME: self._username,
             self.PASSWORD: self._password
         }
-
+        _LOGGER.debug(self.USERNAME: self._username, self.PASSWORD: self._password)
+        
         try:
             # Make an attempt to log in.
             with async_timeout.timeout(10, loop=self._loop):
                 response = yield from self._websession.post(
                     self.LOGIN_URL.format, data=params)
+            test = yield from response.text
+            _LOGGER.debug(test)
             _LOGGER.debug(
                 'Status from AdtPulse.com login %s', response.status)
             _LOGGER.info('Successful login to AdtPulse.com')        
