@@ -158,8 +158,7 @@ class AdtPulsedotcom(object):
             _LOGGER.info('Successful login to AdtPulse.com')
             
             _LOGGER.debug(self._websession.post(self.LOGIN_URL.format, data=params)
-            text2 = yield from response.text()
-            _LOGGER.debug(text2)
+            _LOGGER.debug(response.text())
             tree = BeautifulSoup(text2, 'html.parser')
         
         except (asyncio.TimeoutError, aiohttp.ClientError):
